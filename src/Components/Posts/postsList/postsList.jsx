@@ -1,12 +1,10 @@
-import React, { Children } from 'react';
+import React from 'react';
 import style from './postsList.module.css';
 import {
     BrowserRouter as Router,
-    Switch,
     Route,
     Link
 } from "react-router-dom";
-import Post from '../Comments/comments';
 
 
 const PostList = (props) => {
@@ -19,20 +17,21 @@ const PostList = (props) => {
     return (
         <Router>
             <div className={style.container}>
-                <Link to={`/${props.item.id}`}
-                    onClick={hideListPosts}
-                >
-                    {props.item.title}
-                </Link>
+                <Link to={`/${props.item.id}`} onClick={hideListPosts} className={style.link}>
+                    <div className={style.titleContainer}>
+                        {props.item.title}
+                    </div>
+                    <div className={style.bodyContainer}>
+                        {props.item.body}
+                    </div>
 
-                <Route path={`/${props.item.id}`} >
+                </Link>
+                <Route path={`/${props.item.id}`}>
                     {props.children}
                 </Route>
-
             </div>
-
         </Router>
-    )
+    );
 }
 
 export default PostList;

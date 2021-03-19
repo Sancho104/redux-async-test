@@ -1,0 +1,18 @@
+.container {
+    align-items: center;
+    margin: 10px;
+    /* border: black solid 1px; */
+    border-radius: 10px;
+    width: 60%;
+    padding: 10px;
+    background-color:rgb(187, 219, 248);
+}
+.nameContainer {
+    font-weight: 500;
+}
+.emailContainer {
+
+}
+.bodyContainer {
+
+}

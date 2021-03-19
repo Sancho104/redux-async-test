@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import style from './post.module.css'
+import style from './comments.module.css'
 
 
 const Comments = (props) => {
@@ -8,19 +8,10 @@ const Comments = (props) => {
     // console.log(props)
     return (
         <div className={style.container}>
-
-
-
-            <br />
-
             <div>
-                <span>Name: {props.itemComment.name}</span>
-                <br />
-                <span>Email: {props.itemComment.email}</span>
-                <br />
-                <span><i>Message: </i>{props.itemComment.body}</span>
-                <br />
-                <br />
+                <div className={style.nameContainer}>Name: {props.itemComment.name}</div>
+                <div className={style.emailContainer}>Email: {props.itemComment.email}</div>
+                <div className={style.bodyContainer}>Message: {props.itemComment.body}</div>
             </div>
 
         </div>

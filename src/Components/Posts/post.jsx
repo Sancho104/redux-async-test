@@ -3,19 +3,22 @@ import style from './post.module.css'
 
 const Post = (props) => {
     return (
-        <div className={style.postContainer}>
+        <div>
+            <div className={style.headlerPost}>
+                Post:
+            </div>
+            <div className={style.postContainer}>
 
-            <div className={style.postTitle}>
-                Header: {props.post.title}
+                <div className={style.postTitle}>
+                    {props.post.title}
+                </div>
+                <div className={style.postBody}>
+                    {props.post.body}
+                </div>
             </div>
-            <div className={style.postBody}>
-                Text post: {props.post.body}
-            </div>
-            <br /><br />
             <div className={style.containerComments}>
                 Comments:
-        </div>
-
+            </div>
         </div>
     );
 }

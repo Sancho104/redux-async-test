@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import Posts from "../Posts/Posts";
-
-const AxiosRequire = () => {
+// import { getState } from "../../store/store";
+let state;
+const AxiosRequire = (props) => {
     const [posts, setPosts] = useState();
+
     function require() {
         axios.get('https://jsonplaceholder.typicode.com/posts')
             .then(function (response) {
-
                 setPosts(response);
                 // console.log(posts)
 
@@ -17,26 +18,56 @@ const AxiosRequire = () => {
             })
     }
 
-    let a;
-    if (posts) {
-        a = <Posts posts={posts} />
 
-    }
 
     useEffect(() => {
         require()
+        // console.log('use effect')
+        // props.getState(props.createActionPosts('POSTS'))
+        //     .then(function (response) {
+        //         a = <Posts posts={response} />
+        //         state = response
+        //         console.log(state)
+
+        //         return state
+                
+        //     })
+
     });
 
     const postsUpdate = () => {
         require();
-        console.log(posts)
+        console.log(state);
     }
+    let a;
+    if (posts) {
+        a = <Posts posts={posts} />
+        
+    }
+    function getStat() {
+        if (state) {
+            console.log(state)
+            debugger
+            return state
+        } else {
+            setTimeout(() => {
+                getStat()
+            }, 500);
+        }
+    }
+
+    setInterval(() => {
+        // debugger
+        // console.log(state)
+    }, 2000);
 
     return (
         <div>
-            <button onClick={postsUpdate}>Update posts</button>
+
             <div>
                 {a}
+                { }
+                {/* {(!state) ? getStat() : <Posts posts={state} />} */}
             </div>
         </div>
     );
