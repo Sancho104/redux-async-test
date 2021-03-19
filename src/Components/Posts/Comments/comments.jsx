@@ -4,8 +4,6 @@ import style from './comments.module.css'
 
 
 const Comments = (props) => {
-    // debugger
-    // console.log(props)
     return (
         <div className={style.container}>
             <div>
