@@ -1,17 +1,13 @@
 import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
-import AxiosRequire from './Components/axiosRequire/axiosRequire';
-import { createActionPosts, getState } from './store/store';
-// import axios from 'axios';
+import PostList from './pages/PostList/PostList';
 
 function App() {
   return (
-    <div className="App">
-      <AxiosRequire
-        getState={getState}
-        createActionPosts={createActionPosts}
-      />
-    </div>
+    <Router>
+      <PostList />
+    </Router>
   );
 }
 
