@@ -5,22 +5,23 @@ import Comments from './Comments/comments';
 import style from './post.module.css'
 
 
-const Post = () => {
+const Post = (props) => {
     const { id } = useParams();
     const [comments, setComments] = useState();
     useEffect(() => {
-        axios.get('https://jsonplaceholder.typicode.com/comments',
-            {
-                params: {
-                    postId: id,
-                }
-            })
-            .then(function (response) {
-                setComments(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        props.getComments(id);
+        // axios.get('https://jsonplaceholder.typicode.com/comments',
+        //     {
+        //         params: {
+        //             postId: id,
+        //         }
+        //     })
+        //     .then(function (response) {
+        //         setComments(response.data);
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
     }, []);
 
     return (
@@ -29,8 +30,8 @@ const Post = () => {
                 Comments:
             </div>
             {
-                !!comments
-                    ? comments.map((item) => <Comments item={item} key={item.id} />)
+                !!props.comments
+                    ? props.comments.map((item) => <Comments item={item} key={item.id} />)
                     : (
                         <div>
                             Loading...

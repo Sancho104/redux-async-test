@@ -1,21 +1,25 @@
 import React from 'react'
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import Post from './pages/PostDetails/post';
-import PostList from './pages/PostList/PostList';
+import ContainerComments from './ContainerComments';
+import ContainerPosts from './ContainerPosts';
+import { store } from './store/store';
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path='/'>
-          <PostList />
-        </Route>
-        <Route path='/post/:id'>
-          <Post />
-        </Route>
-      </Switch>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          <Route exact path='/'>
+            <ContainerPosts />
+          </Route>
+          <Route path='/post/:id'>
+            <ContainerComments />
+          </Route>
+        </Switch>
+      </Router>
+    </Provider>
   );
 }
 
