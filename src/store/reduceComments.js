@@ -7,7 +7,6 @@ const actionTypes = {
 }
 
 export function createActionComments(id) {
-    console.log('create action post')
     return dispatch => {
         axios.get('https://jsonplaceholder.typicode.com/comments',
             {
@@ -16,7 +15,7 @@ export function createActionComments(id) {
                 }
             })
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 dispatch(requestSuccess(res.data));
             })
             .catch(err => {

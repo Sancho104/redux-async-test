@@ -7,9 +7,12 @@ import style from './post.module.css'
 
 const Post = (props) => {
     const { id } = useParams();
-    const [comments, setComments] = useState();
+    const { userId } = useParams();
+    // const [comments, setComments] = useState();
     useEffect(() => {
         props.getComments(id);
+        props.getUser();
+        console.log(props.info)
         // axios.get('https://jsonplaceholder.typicode.com/comments',
         //     {
         //         params: {
@@ -26,18 +29,36 @@ const Post = (props) => {
 
     return (
         <div>
-            <div className={style.containerComments}>
-                Comments:
+            <div>
+                {
+                    !!props.users
+                        ? (
+
+                            <div>
+   
+                            </div>
+                        )
+                        : (
+                            <div>
+                                Error...
+                            </div>
+                        )
+                }
             </div>
-            {
-                !!props.comments
-                    ? props.comments.map((item) => <Comments item={item} key={item.id} />)
-                    : (
-                        <div>
-                            Loading...
-                        </div>
-                    )
-            }
+            <div>
+                <div className={style.containerComments}>
+                    Comments:
+            </div>
+                {
+                    !!props.comments && !!props.users
+                        ? props.comments.map((item) => <Comments item={item} key={item.id} post={props} />)
+                        : (
+                            <div>
+                                Loading...
+                            </div>
+                        )
+                }
+            </div>
         </div>
     );
 }

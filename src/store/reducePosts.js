@@ -7,7 +7,6 @@ const actionTypes = {
 }
 
 export function createActionPosts() {
-    console.log('create action post')
     return dispatch => {
         axios.get('https://jsonplaceholder.typicode.com/posts')
             .then(res => {
