@@ -7,9 +7,9 @@ const Comments = (props) => {
     return (
         <div className={style.container}>
             <div>
-                <div className={style.nameContainer}>Name: {props.item.name}</div>
-                <div className={style.emailContainer}>Email: {props.item.email}</div>
-                <div className={style.bodyContainer}>Message: {props.item.body}</div>
+                <div className={style.nameContainer}>Name: {props.itemComment.name}</div>
+                <div className={style.emailContainer}>Email: {props.itemComment.email}</div>
+                <div className={style.bodyContainer}>Message: {props.itemComment.body}</div>
             </div>
 
         </div>

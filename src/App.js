@@ -1,25 +1,17 @@
 import React from 'react'
-import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import ContainerComments from './ContainerComments';
-import ContainerPosts from './ContainerPosts';
-import { store } from './store/store';
+import AxiosRequire from './Components/axiosRequire/axiosRequire';
+import { createActionPosts, getState } from './store/store';
+// import axios from 'axios';
 
 function App() {
   return (
-    <Provider store={store}>
-      <Router>
-        <Switch>
-          <Route exact path='/'>
-            <ContainerPosts />
-          </Route>
-          <Route path='/post/:id'>
-            <ContainerComments />
-          </Route>
-        </Switch>
-      </Router>
-    </Provider>
+    <div className="App">
+      <AxiosRequire
+        getState={getState}
+        createActionPosts={createActionPosts}
+      />
+    </div>
   );
 }
 
