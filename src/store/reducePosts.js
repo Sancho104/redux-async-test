@@ -6,12 +6,12 @@ const actionTypes = {
 
 }
 
-export function createActionPosts() {
+export function createActionPosts(postId) {
     return dispatch => {
         axios.get('https://jsonplaceholder.typicode.com/posts')
             .then(res => {
                 console.log(res.data);
-                dispatch(requestSuccess(res.data));
+                dispatch(requestSuccess(res.data, postId));
             })
             .catch(err => {
                 dispatch(requestFail(err));

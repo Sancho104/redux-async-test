@@ -14,7 +14,7 @@ export function crateActionUserItem(item) {
     }
 }
 
-export function createActionPosts() {
+export function createActionUsers() {
     console.log('create action user');
     return dispatch => {
         axios.get('https://jsonplaceholder.typicode.com/users')

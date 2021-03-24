@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import PostListItem from '../PostList/PostListItem/PostListItem';
 import Comments from './Comments/comments';
 import style from './post.module.css'
 
@@ -12,7 +13,8 @@ const Post = (props) => {
     useEffect(() => {
         props.getComments(id);
         props.getUser();
-        console.log(props.info)
+        props.getPosts()
+        // console.log(props)
         // axios.get('https://jsonplaceholder.typicode.com/comments',
         //     {
         //         params: {
@@ -27,15 +29,26 @@ const Post = (props) => {
         //     });
     }, []);
 
+    const findPost = postId => props.posts[postId - 1];
+    const filterUser = (userId, callback) => {
+        return props.users[userId]
+    }
+
+    const findUserId = (callback) => {
+        let a = callback(id);
+        return a.userId;
+    }
+
     return (
         <div>
             <div>
                 {
-                    !!props.users
+                    (!!props.users && !!props.posts)
                         ? (
 
                             <div>
-   
+                                <PostListItem item={findPost(id)} user={filterUser(1)} />
+                                {/* <PostListItem item={findPost(id)} user={filterUser(findUserId(findPost))} /> */}
                             </div>
                         )
                         : (
