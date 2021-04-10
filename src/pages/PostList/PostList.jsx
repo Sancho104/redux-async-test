@@ -1,23 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PostListItem from './PostListItem/PostListItem';
-import axios from 'axios';
 
 const PostList = (props) => {
-    const [posts, setPosts] = useState();
-    let a = 10
     useEffect(() => {
         props.getPosts();
         props.getUsers();
-        console.log(props);
-        // axios.get('https://jsonplaceholder.typicode.com/posts')
-        //     .then(function (response) {
-        //         setPosts(response.data);
-        //         // console.log(posts)
-
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error)
-        //     });
     }, []);
 
     const filterUser = (userId) => {

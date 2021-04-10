@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 import Post from './pages/PostDetails/post';
 import { createActionComments, reduceComments } from './store/reduceComments';
 import { reduceUsers } from './store/reduceUsers';
-import { createActionUsers } from './store/reduceUsers';
+import { createActionUsers, crateActionUserItem } from './store/reduceUsers';
 import { createActionPosts, reducePosts } from "./store/reducePosts";
 
 const selectFindUser = (state, userId) => {
@@ -11,25 +11,22 @@ const selectFindUser = (state, userId) => {
 }
 const selectUsers = state => state.reduceUsers.users
 const selectComments = state => state.reduceComments.comments;
+const selectPosts = state => state.reducePosts.posts;
 
 const getVisibleTodos = createSelector(
-    [selectUsers, selectComments],
-    (users, comments) => {
-        return (users)
+    [selectUsers, selectComments, selectPosts],
+    (users, comments, posts) => {
+        return (posts)
     }
   );
-
-// const select = createSelector(
-//     selectFindUser,
-//     selectComments,
-// )
 
 const mapStateToProps = (state, props) => {
     return {
         comments: state.reduceComments.comments,
         users: state.reduceUsers.users,
+        itemUser: state.reduceUsers.item,
         posts: state.reducePosts.posts,
-        info: getVisibleTodos(state),
+        // info: getVisibleTodos(state),
     }
 }
 
@@ -38,12 +35,12 @@ const mapDispatchToProps = (dispatch) => {
         getComments: (id) => {
             dispatch(createActionComments(id));
         },
-        getPosts: (postId) => {
-            dispatch(createActionPosts(postId))
+        getPosts: () => {
+            dispatch(createActionPosts())
         },
         getUser: () => {
             dispatch(createActionUsers());
-        }
+        },
     }
 }
 

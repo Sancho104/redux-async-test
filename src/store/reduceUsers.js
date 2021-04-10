@@ -6,16 +6,15 @@ const actionTypes = {
     USER_ITEM: 'USER_ITEM',
 }
 
-export function crateActionUserItem(item) {
-    console.log('user retun')
+export function crateActionUserItem(post) {
+    console.log(post)
     return {
         type: actionTypes.USER_ITEM,
-        item
+        post
     }
 }
 
 export function createActionUsers() {
-    console.log('create action user');
     return dispatch => {
         axios.get('https://jsonplaceholder.typicode.com/users')
             .then(res => {
@@ -28,14 +27,14 @@ export function createActionUsers() {
     }
 }
 
-const requestSuccess = (result) => {
-    let map = new Map();
-    result.map(item => map.set(item.id, item));
-    let obj = Object.fromEntries(map);
+const requestSuccess = (usersArray) => {
+    const users = {};
+    usersArray.forEach(item => {
+        users[item.id] = item;
+    });
     return {
         type: actionTypes.USERS_SUCCESS,
-        result: obj,
-
+        users,
     }
 }
 
@@ -47,25 +46,24 @@ const requestFail = (error) => {
 
 const ititialstate = {
     error: false,
-    // users: new Map(),
     users: {},
 }
 
 export const reduceUsers = (state = ititialstate, action) => {
     switch (action.type) {
         case actionTypes.USERS_SUCCESS:
-            console.log(action.result);
             return {
-                users: action.result,
+                users: action.users,
                 error: false,
             }
         case actionTypes.USERS_FAIL:
             return {
                 error: true,
-                users: [],
+                users: {},
             }
         case actionTypes.USER_ITEM:
-            let newState = { ...state, item: action.item, error: false }
+            console.log(action);
+            let newState = { ...state, item: action.post, error: false }
             return newState;
         default:
             return state;
