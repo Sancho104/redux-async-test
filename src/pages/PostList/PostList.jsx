@@ -1,20 +1,22 @@
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PostListItem from './PostListItem/PostListItem';
+import { getPosts, postsWithUserSelector } from '../../store/reducePosts';
+import { getUsers } from '../../store/Users/actions';
 
-const PostList = (props) => {
+const PostList = () => {
+    const postsWithUser = useSelector(postsWithUserSelector);
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        props.getPosts();
-        props.getUsers();
-    }, []);
-
-    const filterUser = (userId) => {
-        return props.info[userId];
-    }
+        dispatch(getPosts());
+        dispatch(getUsers());
+    }, [dispatch]);
 
     return (
         <div>
-            {props.posts.length !== 0
-                ? props.posts.map((item) => <PostListItem item={item} key={item.id} user={filterUser(item.userId)}/>)
+            {!!postsWithUser.length
+                ? postsWithUser.map((item) => <PostListItem item={item} key={item.id} />)
                 : (
                     <div>
                         Loading...

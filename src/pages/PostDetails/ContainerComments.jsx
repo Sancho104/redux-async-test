@@ -1,12 +1,10 @@
 import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
-import Post from './pages/PostDetails/post';
-import { createActionComments, reduceComments } from './store/reduceComments';
-import { reduceUsers } from './store/reduceUsers';
-import { createActionUsers, crateActionUserItem } from './store/reduceUsers';
-import { createActionPosts, reducePosts } from "./store/reducePosts";
+import Post from './post';
+import { createActionComments } from '../../store/reduceComments';
+import { getUsers } from '../../store/Users/actions';
+import { getPosts } from "../../store/reducePosts";
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
     return {
         comments: state.reduceComments.comments,
         users: state.reduceUsers.users,
@@ -20,10 +18,10 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(createActionComments(id));
         },
         getPosts: () => {
-            dispatch(createActionPosts())
+            dispatch(getPosts())
         },
         getUser: () => {
-            dispatch(createActionUsers());
+            dispatch(getUsers());
         },
     }
 }

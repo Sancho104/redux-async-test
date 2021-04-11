@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
-import PostListItem from '../PostList/PostListItem/PostListItem';
 import Comments from './Comments/comments';
 import style from './post.module.css'
 import PostItem from './PostItem';
@@ -11,7 +10,7 @@ const Post = (props) => {
         props.getComments(id);
         props.getUser();
         props.getPosts();
-    }, []);
+    }, [id]);
 
     const findPost = postId => {
         return props.posts.find((post) => post.id === +postId);
