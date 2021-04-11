@@ -6,27 +6,11 @@ import { reduceUsers } from './store/reduceUsers';
 import { createActionUsers, crateActionUserItem } from './store/reduceUsers';
 import { createActionPosts, reducePosts } from "./store/reducePosts";
 
-const selectFindUser = (state, userId) => {
-
-}
-const selectUsers = state => state.reduceUsers.users
-const selectComments = state => state.reduceComments.comments;
-const selectPosts = state => state.reducePosts.posts;
-
-const getVisibleTodos = createSelector(
-    [selectUsers, selectComments, selectPosts],
-    (users, comments, posts) => {
-        return (posts)
-    }
-  );
-
 const mapStateToProps = (state, props) => {
     return {
         comments: state.reduceComments.comments,
         users: state.reduceUsers.users,
-        itemUser: state.reduceUsers.item,
         posts: state.reducePosts.posts,
-        // info: getVisibleTodos(state),
     }
 }
 

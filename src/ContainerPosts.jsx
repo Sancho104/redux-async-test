@@ -4,20 +4,9 @@ import PostList from './pages/PostList/PostList';
 import { createActionPosts } from './store/reducePosts';
 import { createActionUsers } from './store/reduceUsers';
 
-const selectUsers = state => state.reduceUsers.users
-const selectComments = state => state.reduceComments.comments;
-
-const getVisibleTodos = createSelector(
-    [selectUsers, selectComments],
-    (users, comments) => {
-        return (users)
-    }
-  );
-
 const mapStateToProps = (state) => {
     return {
         posts: state.reducePosts.posts,
-        info: getVisibleTodos(state)
     }
 }
 

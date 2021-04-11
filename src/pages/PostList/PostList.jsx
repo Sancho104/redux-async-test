@@ -13,7 +13,7 @@ const PostList = (props) => {
 
     return (
         <div>
-            {!!props.posts
+            {props.posts.length !== 0
                 ? props.posts.map((item) => <PostListItem item={item} key={item.id} user={filterUser(item.userId)}/>)
                 : (
                     <div>
