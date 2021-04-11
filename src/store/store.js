@@ -1,12 +1,12 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import thunk from "redux-thunk";
-import { reduceComments } from "./reduceComments";
-import { reducePosts } from "./reducePosts";
+import { commentsReducer } from "./Comments/reducer";
+import { postsReducer } from "./Posts/reducer";
 import reduceUsers from "./Users/reducer";
 
 const reducer = combineReducers({
-    reducePosts,
-    reduceComments,
+    postsReducer,
+    commentsReducer,
     reduceUsers,
 });
 

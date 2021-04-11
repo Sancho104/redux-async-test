@@ -2,7 +2,7 @@ import React from 'react'
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import ContainerComments from './pages/PostDetails/ContainerComments';
+import Post from './pages/PostDetails/post';
 import PostList from './pages/PostList/PostList';
 import { store } from './store/store';
 
@@ -15,7 +15,7 @@ function App() {
             <PostList />
           </Route>
           <Route path='/post/:id'>
-            <ContainerComments />
+            <Post />
           </Route>
         </Switch>
       </Router>

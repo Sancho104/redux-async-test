@@ -13,7 +13,7 @@ export function getUsers() {
             })
             .catch(err => {
                 dispatch(requestFail(err));
-                console.log(err.message);
+                console.error(err.message);
             })
     }
 }

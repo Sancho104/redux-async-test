@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './comments.module.css'
+import style from './comments.module.scss'
 
 
 const Comments = (props) => {
