@@ -2,8 +2,8 @@ import React from 'react'
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import ContainerComments from './ContainerComments';
-import ContainerPosts from './ContainerPosts';
+import ContainerComments from './pages/PostDetails/ContainerComments';
+import PostList from './pages/PostList/PostList';
 import { store } from './store/store';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path='/'>
-            <ContainerPosts />
+            <PostList />
           </Route>
           <Route path='/post/:id'>
             <ContainerComments />

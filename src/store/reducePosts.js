@@ -1,4 +1,6 @@
 import axios from "axios";
+import { createSelector } from "reselect";
+import { usersSelector } from "./Users/selectors";
 
 const actionTypes = {
     POSTS_SUCCESS: 'POSTS_SUCCESS',
@@ -6,17 +8,14 @@ const actionTypes = {
 
 }
 
-export function createActionPosts() {
-    console.log('create action post')
+export function getPosts() {
     return dispatch => {
         axios.get('https://jsonplaceholder.typicode.com/posts')
             .then(res => {
-                console.log(res.data);
                 dispatch(requestSuccess(res.data));
             })
             .catch(err => {
                 dispatch(requestFail(err));
-                console.log(err.message);
             })
     }
 }
@@ -33,6 +32,20 @@ const requestFail = (error) => {
         type: actionTypes.POSTS_FAIL,
     }
 }
+
+const postsSelector = state => state.reducePosts.posts;
+
+export const postsWithUserSelector = createSelector(
+    [postsSelector, usersSelector],
+    (posts, users) => {
+        if (!Object.keys(users).length) {
+            return [];
+        }
+        return posts.map((post) => {
+            const newPost = { ...post, user: users[post.userId] }
+            return newPost;
+        })
+    })
 
 const ititialstate = {
     error: false,

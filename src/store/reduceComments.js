@@ -3,12 +3,14 @@ import axios from "axios";
 const actionTypes = {
     COMMENTS_SUCCESS: 'COMMENTS_SUCCESS',
     COMMENTS_SUCCESS_FAIL: 'COMMENTS_FAIL',
-
+    COMMENTS_REQUEST: 'COMMENTS_REQUEST',
 }
 
 export function createActionComments(id) {
-    console.log('create action post')
     return dispatch => {
+        dispatch({
+            type: actionTypes.COMMENTS_REQUEST,
+        })
         axios.get('https://jsonplaceholder.typicode.com/comments',
             {
                 params: {
@@ -16,7 +18,6 @@ export function createActionComments(id) {
                 }
             })
             .then(res => {
-                console.log(res.data);
                 dispatch(requestSuccess(res.data));
             })
             .catch(err => {
@@ -41,20 +42,26 @@ const requestFail = (error) => {
 
 const ititialstate = {
     error: false,
-    comments: []
+    comments: [],
+    loading: false,
 }
 
 export const reduceComments = (state = ititialstate, action) => {
     switch (action.type) {
+        case actionTypes.COMMENTS_REQUEST:
+            return {
+                ...state, loading: true
+            }
         case actionTypes.COMMENTS_SUCCESS:
             return {
                 comments: action.result,
                 error: false,
+                loading: false,
             }
         case actionTypes.COMMENTS_FAIL:
             return {
                 error: true,
-                poscommentsts: [],
+                loading: false,
             }
         default:
             return state;

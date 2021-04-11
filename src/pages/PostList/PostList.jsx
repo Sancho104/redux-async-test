@@ -1,26 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PostListItem from './PostListItem/PostListItem';
-import axios from 'axios';
+import { getPosts, postsWithUserSelector } from '../../store/reducePosts';
+import { getUsers } from '../../store/Users/actions';
 
-const PostList = (props) => {
-    const [posts, setPosts] = useState();
+const PostList = () => {
+    const postsWithUser = useSelector(postsWithUserSelector);
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        props.getPosts();
-        // axios.get('https://jsonplaceholder.typicode.com/posts')
-        //     .then(function (response) {
-        //         setPosts(response.data);
-        //         // console.log(posts)
-
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error)
-        //     });
-    }, []);
+        dispatch(getPosts());
+        dispatch(getUsers());
+    }, [dispatch]);
 
     return (
         <div>
-            {!!props.posts
-                ? props.posts.map((item) => <PostListItem item={item} key={item.id} />)
+            {!!postsWithUser.length
+                ? postsWithUser.map((item) => <PostListItem item={item} key={item.id} />)
                 : (
                     <div>
                         Loading...
