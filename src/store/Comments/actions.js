@@ -13,7 +13,7 @@ export function getComments(id) {
         })
         getUsersApi(id)
             .then(res => {
-                dispatch(requestSuccess(res.data));
+                dispatch(requestSuccess(res.data, id));
             })
             .catch(err => {
                 dispatch(requestFail(err));
@@ -21,10 +21,11 @@ export function getComments(id) {
     }
 }
 
-const requestSuccess = (result) => {
+const requestSuccess = (result, id) => {
     return {
         type: actionTypes.COMMENTS_SUCCESS,
         result,
+        id,
     }
 }
 

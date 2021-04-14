@@ -2,7 +2,7 @@ import { actionTypes } from './actions';
 
 const ititialstate = {
     error: false,
-    comments: [],
+    comments: {},
     loading: false,
 }
 
@@ -14,7 +14,10 @@ export const commentsReducer = (state = ititialstate, action) => {
             }
         case actionTypes.COMMENTS_SUCCESS:
             return {
-                comments: action.result,
+                comments: {
+                    ...state.comments,
+                    [action.id]: action.result,
+                },
                 error: false,
                 loading: false,
             }

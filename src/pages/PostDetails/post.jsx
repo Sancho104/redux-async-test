@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import Comments from './Comments/comments';
+import Comment from './Comments/comments';
 import style from './post.module.scss'
 import PostItem from './Comments/PostItem/PostItem';
 import { getComments } from '../../store/Comments/actions'
@@ -11,7 +11,7 @@ import { postsSelector } from '../../store/Posts/selectors';
 import { usersSelector } from '../../store/Users/selectors';
 import { getUsers } from '../../store/Users/actions';
 
-const Post = (props) => {
+const Post = () => {
     const { id } = useParams();
     const comments = useSelector(commentsSelector);
     const posts = useSelector(postsSelector);
@@ -24,21 +24,18 @@ const Post = (props) => {
         dispatch(getUsers())
     }, [id, dispatch]);
 
-    const findPost = postId => {
-        return posts.find((post) => post.id === +postId);
-    }
-    const post = findPost(id);
+    const post = useMemo(() => posts.find(post => post.id === +id), [id, posts]);
 
     return (
         <div>
             <PostItem item={post} user={users[post ? post.userId : <div>Loading...</div>]} />
-            <div>
-                <div className={style.containerComments}>
+            <div className={style.commentsContainer}>
+                <div className={style.containerCommentsText}>
                     Comments:
                 </div>
                 {
-                    (comments.length && Object.keys(posts).length)
-                        ? comments.map((item) => <Comments item={item} key={item.id} post={props} />)
+                    (!!comments[id] && Object.keys(posts).length)
+                        ? comments[id].map((item) => <Comment item={item} key={item.id} />)
                         : (
                             <div>
                                 Loading...
